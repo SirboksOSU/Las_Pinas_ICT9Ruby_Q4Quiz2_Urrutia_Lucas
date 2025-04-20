@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Grade Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+        }
+        .calculator {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0 15px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        #result {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e8f4fc;
+            border-radius: 5px;
+            display: none;
+        }
+        .rating {
+            font-weight: bold;
+            font-size: 18px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Simple Grade Calculator</h1>
+    
+    <div class="calculator">
+        <p>Enter your grades below (between 70 and 100):</p>
+        
+        <label for="filipino">Filipino:</label>
+        <input type="number" id="filipino" min="70" max="100">
+        
+        <label for="english">English:</label>
+        <input type="number" id="english" min="70" max="100">
+        
+        <label for="science">Science:</label>
+        <input type="number" id="science" min="70" max="100">
+        
+        <label for="math">Math:</label>
+        <input type="number" id="math" min="70" max="100">
+        
+        <label for="social">Social Studies:</label>
+        <input type="number" id="social" min="70" max="100">
+        
+        <button onclick="calculate()">Calculate Average</button>
+        
+        <div id="result">
+            <p>Your average grade is: <span id="average"></span></p>
+            <p class="rating">Rating: <span id="rating"></span></p>
+        </div>
+    </div>
+
+    <script>
+        function calculate() {
+            // Get all the grades
+            let filipino = Number(document.getElementById("filipino").value);
+            let english = Number(document.getElementById("english").value);
+            let science = Number(document.getElementById("science").value);
+            let math = Number(document.getElementById("math").value);
+            let social = Number(document.getElementById("social").value);
+            
+            // Check if all grades are entered
+            if (!filipino || !english || !science || !math || !social) {
+                alert("Please enter all grades!");
+                return;
+            }
+            
+            // Calculate average
+            let average = (filipino + english + science + math + social) / 5;
+            average = average.toFixed(2); // Keep 2 decimal places
+            
+            // Determine rating
+            let rating = "";
+            let ratingColor = "";
+            
+            if (average >= 94) {
+                rating = "Excellent ★";
+                ratingColor = "green";
+            } else if (average >= 87) {
+                rating = "Above Satisfactory ✓";
+                ratingColor = "blue";
+            } else if (average >= 80) {
+                rating = "Satisfactory ✔";
+                ratingColor = "darkblue";
+            } else if (average >= 75) {
+                rating = "Needs Improvement !";
+                ratingColor = "orange";
+            } else if (average >= 70) {
+                rating = "Poor ✗";
+                ratingColor = "red";
+            } else {
+                rating = "Below Passing";
+                ratingColor = "darkred";
+            }
+            
+            // Show results
+            document.getElementById("average").textContent = average;
+            document.getElementById("rating").textContent = rating;
+            document.getElementById("rating").style.color = ratingColor;
+            document.getElementById("result").style.display = "block";
+        }
+    </script>
+</body>
+</html>
